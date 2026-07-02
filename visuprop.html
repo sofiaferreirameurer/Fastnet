@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Visualizar cadastros dos proprietários</title>
+
+    <style>
+      .botao-inserir-novo {
+        position: fixed;
+        top: 30px;
+        left: 150px;
+        padding: 50px 100px;
+        font-size: 25px;
+        cursor: pointer;
+        background-color: rgb(101, 175, 224);
+        border-radius: 24px;
+        transition: 0.2s;
+        display: inline-block;
+        text-decoration: underline;
+        color: blue;
+      }
+
+      .conteúdo-do-botao {
+        display: flex;
+        gap: 140px;
+        justify-content: center;
+      }
+
+      a:hover {
+        background-color: rgb(15, 116, 184);
+      }
+
+      table {
+        width: 90%;
+        margin: 180px auto 30px auto;
+        border-collapse: collapse;
+        background: white;
+      }
+
+      th,
+      td {
+        border: 1px solid #ccc;
+        padding: 10px;
+        text-align: center;
+      }
+
+      th {
+        background-color: rgb(101, 175, 224);
+      }
+
+      tr:nth-child(even) {
+        background-color: #f2f2f2;
+      }
+    </style>
+  </head>
+  <body>
+    <a href="./cad_prop.html" class="botao-inserir-novo">
+      Inserir novo proprietário
+    </a>
+
+    <table id="tabelaProprietarios">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nome</th>
+          <th>Nascimento</th>
+          <th>CPF</th>
+          <th>RG</th>
+          <th>Email</th>
+          <th>Telefone</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+
+    <script>
+      let proprietarios = JSON.parse(localStorage.getItem('proprietarios'))
+
+      if (proprietarios == null) {
+        proprietarios = [
+          {
+            id_prop: 1,
+            nome: 'Ana Beatriz Souza',
+            nascimento: '15/03/1992',
+            cpf: '123.456.789-10',
+            rg: '12345678-9',
+            email: 'ana.souza@email.com',
+            tel: '(41)99876-1234'
+          },
+
+          {
+            id_prop: 2,
+            nome: 'Carlos Eduardo Lima',
+            nascimento: '28/11/1985',
+            cpf: '234.567.890-21',
+            rg: '23456789-0',
+            email: 'carlos.lima@email.com',
+            tel: '(41)99765-2345'
+          },
+
+          {
+            id_prop: 3,
+            nome: 'Mariana Alves Rocha',
+            nascimento: '09/07/1998',
+            cpf: '345.678.901-32',
+            rg: '34567890-1',
+            email: 'mariana.rocha@email.com',
+            tel: '(41)99654-3456'
+          },
+
+          {
+            id_prop: 4,
+            nome: 'João Pedro Martins',
+            nascimento: '21/01/1979',
+            cpf: '456.789.012-43',
+            rg: '45678901-2',
+            email: 'joao.martins@email.com',
+            tel: '(41)99543-4567'
+          },
+
+          {
+            id_prop: 5,
+            nome: 'Fernanda Cristina Gomes',
+            nascimento: '30/09/1990',
+            cpf: '567.890.123-54',
+            rg: '56789012-3',
+            email: 'fernanda.gomes@email.com',
+            tel: '(41)99432-5678'
+          }
+        ]
+
+        localStorage.setItem('proprietarios', JSON.stringify(proprietarios))
+      }
+
+      const tbody = document.querySelector('#tabelaProprietarios tbody')
+
+      if (proprietarios.length == 0) {
+        const linha = document.createElement('tr')
+
+        const coluna = document.createElement('td')
+        coluna.colSpan = 7
+        coluna.textContent = 'Nenhum proprietário cadastrado.'
+
+        linha.appendChild(coluna)
+        tbody.appendChild(linha)
+      }
+
+      proprietarios.forEach(proprietario => {
+        const linha = document.createElement('tr')
+
+        let td = document.createElement('td')
+        td.textContent = proprietario.id_prop
+        linha.appendChild(td)
+
+        td = document.createElement('td')
+        td.textContent = proprietario.nome
+        linha.appendChild(td)
+
+        td = document.createElement('td')
+        td.textContent = proprietario.nascimento
+        linha.appendChild(td)
+
+        td = document.createElement('td')
+        td.textContent = proprietario.cpf
+        linha.appendChild(td)
+
+        td = document.createElement('td')
+        td.textContent = proprietario.rg
+        linha.appendChild(td)
+
+        td = document.createElement('td')
+        td.textContent = proprietario.email
+        linha.appendChild(td)
+
+        td = document.createElement('td')
+        td.textContent = proprietario.tel
+        linha.appendChild(td)
+
+        tbody.appendChild(linha)
+      })
+    </script>
+  </body>
+</html>

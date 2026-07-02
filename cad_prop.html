@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>cadastrar proprietário</title>
+
+    <style>
+      body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-family: Arial;
+      }
+
+      .logo {
+        font-size: 50px;
+        font-weight: bold;
+        font-family: Arial;
+        color: rgb(15, 116, 184);
+        text-align: center;
+        margin-bottom: 50px;
+      }
+
+      form {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px 40px;
+        align-items: start;
+      }
+
+      .campo {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+        margin-bottom: 65px;
+      }
+
+      input {
+        width: 250px;
+        padding: 10px;
+        border: 2px solid #ccc;
+        border-radius: 8px;
+        transition: 0.2s;
+      }
+
+      input:hover {
+        background-color: rgb(43, 121, 173);
+      }
+
+      .salvar {
+        grid-column: 1/-1;
+        justify-self: center;
+        background-color: rgb(43, 121, 173);
+        color: black;
+        border: none;
+        grid-column: span 2;
+        width: 275px;
+        padding: 10px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: 0.2s;
+      }
+
+      .salvar:hover {
+        background-color: rgb(30, 95, 140);
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="logo">🛜FastNet🛜</div>
+
+    <form id="formProprietario">
+      <div class="campo">
+        <label for="nome">Nome completo</label>
+        <input type="text" id="nome" name="nome" required />
+      </div>
+
+      <div class="campo">
+        <label for="nascimento">Data de nascimento </label>
+        <input type="date" id="nascimento" name="nascimento" required />
+      </div>
+
+      <div class="campo">
+        <label for="cpf">CPF (somente dígitos)</label>
+        <input type="text" id="cpf" name="cpf" maxlength="14" required />
+      </div>
+
+      <div class="campo">
+        <label for="rg"> RG </label>
+        <input type="text" id="rg" name="rg" maxlength="12" required />
+      </div>
+
+      <div class="campo">
+        <label for="email">E-mail</label>
+        <input type="email" id="email" name="email" required />
+      </div>
+
+      <div class="campo">
+        <label for="tel">Telefone</label>
+        <input type="tel" id="tel" name="tel" maxlength="11" required />
+      </div>
+
+      <button type="submit" class="salvar">Salvar</button>
+    </form>
+
+    <script>
+      let proprietarios =
+        JSON.parse(localStorage.getItem('proprietarios')) || []
+
+      localStorage.setItem('proprietarios', JSON.stringify(proprietarios))
+
+      const form = document.getElementById('formProprietario')
+
+      form.addEventListener('submit', function (event) {
+        event.preventDefault()
+
+        const nome = document.getElementById('nome').value.trim()
+        const nascimento = document.getElementById('nascimento').value
+        const cpf = document.getElementById('cpf').value.trim()
+        const rg = document.getElementById('rg').value.trim()
+        const email = document.getElementById('email').value.trim()
+        const tel = document.getElementById('tel').value.trim()
+        const anoNascimento = parseInt(nascimento.substring(0, 4))
+        const anoAtual = new Date().getFullYear()
+
+        if (anoAtual - anoNascimento < 18) {
+          alert('O proprietário deve ser maior de idade.')
+          return
+        }
+
+        if (
+          nome == '' ||
+          nascimento == '' ||
+          cpf == '' ||
+          rg == '' ||
+          email == '' ||
+          tel == ''
+        ) {
+          alert('Preencha todos os campos.')
+          return
+        }
+
+        let novoID = 1
+        if (proprietarios.length > 0) {
+          novoID = Math.max(...proprietarios.map(p => p.id_prop)) + 1
+        }
+
+        const partes = nascimento.split('-')
+        const dataFormatada = partes[2] + '/' + partes[1] + '/' + partes[0]
+        const novoProprietario = {
+          id_prop: novoID,
+          nome: nome,
+          nascimento: dataFormatada,
+          cpf: cpf,
+          rg: rg,
+          email: email,
+          tel: tel
+        }
+
+        proprietarios.push(novoProprietario)
+        localStorage.setItem('proprietarios', JSON.stringify(proprietarios))
+
+        alert('Cadastro realizado com sucesso!')
+        form.reset()
+      })
+    </script>
+  </body>
+</html>
