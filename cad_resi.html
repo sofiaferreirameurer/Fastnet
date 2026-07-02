@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>cadastrar residência</title>
+
+    <style>
+      body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-family: Arial;
+      }
+
+      .logo {
+        font-size: 50px;
+        font-weight: bold;
+        font-family: Arial;
+        color: rgb(15, 116, 184);
+        text-align: center;
+        margin-bottom: 50px;
+      }
+
+      form {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px 40px;
+        align-items: start;
+      }
+
+      .campo {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+        margin-bottom: 65px;
+      }
+
+      input {
+        width: 250px;
+        padding: 10px;
+        border: 2px solid #ccc;
+        border-radius: 8px;
+        transition: 0.2s;
+      }
+
+      select {
+        width: 275px;
+        padding: 10px;
+        border: 2px solid #ccc;
+        border-radius: 8px;
+        transition: 0.2s;
+        background-color: white;
+      }
+
+      input:hover {
+        background-color: rgb(43, 121, 173);
+      }
+
+      .salvar {
+        grid-column: 1/-1;
+        justify-self: center;
+        background-color: rgb(43, 121, 173);
+        color: black;
+        border: none;
+        grid-column: span 2;
+        width: 275px;
+        padding: 10px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: 0.2s;
+      }
+
+      .salvar:hover {
+        background-color: rgb(30, 95, 140);
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="logo">🛜FastNet🛜</div>
+
+    <form id="formResidencia">
+      <div class="campo">
+        <label for="cep">CEP</label>
+        <input type="text" id="cep" name="cep" required />
+      </div>
+
+      <div class="campo">
+        <label for="estado">Estado</label>
+        <input type="text" id="estado" name="estado" required />
+      </div>
+
+      <div class="campo">
+        <label for="cidade">Cidade</label>
+        <input type="text" id="cidade" name="cidade" required />
+      </div>
+
+      <div class="campo">
+        <label for="bairro">Bairro</label>
+        <input type="text" id="bairro" name="bairro" required />
+      </div>
+
+      <div class="campo">
+        <label for="rua">Rua </label>
+        <input type="text" id="rua" name="rua" required />
+      </div>
+
+      <div class="campo">
+        <label for="número">Número </label>
+        <input type="text" id="número" name="número" required />
+      </div>
+
+      <div class="campo">
+        <label for="complemento">complemento</label>
+        <input type="text" id="complemento" name="complemento" required />
+      </div>
+
+      <div class="campo">
+        <label for="proprietário">Proprietário</label>
+        <select id="proprietario" name="proprietario" required>
+          <option value="">Selecione um proprietário</option>
+        </select>
+      </div>
+
+      <button type="submit" class="salvar">Salvar</button>
+    </form>
+    <script>
+      const proprietarios =
+        JSON.parse(localStorage.getItem('proprietarios')) || []
+
+      const select = document.getElementById('proprietario')
+
+      proprietarios.forEach(prop => {
+        const option = document.createElement('option')
+
+        option.value = prop.id_prop
+
+        option.textContent = prop.id_prop + ' - ' + prop.nome
+
+        select.appendChild(option)
+      })
+
+      let residencias = JSON.parse(localStorage.getItem('residencias')) || []
+
+      const form = document.getElementById('formResidencia')
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault()
+
+        const cep = document.getElementById('cep').value.trim()
+        const estado = document.getElementById('estado').value.trim()
+        const cidade = document.getElementById('cidade').value.trim()
+        const bairro = document.getElementById('bairro').value.trim()
+        const rua = document.getElementById('rua').value.trim()
+        const numero = document.getElementById('número').value.trim()
+        const complemento = document.getElementById('complemento').value.trim()
+        const proprietario = document.getElementById('proprietario').value
+
+        if (
+          cep == '' ||
+          estado == '' ||
+          cidade == '' ||
+          bairro == '' ||
+          rua == '' ||
+          numero == '' ||
+          complemento == '' ||
+          proprietario == ''
+        ) {
+          alert('Preencha todos os campos.')
+          return
+        }
+
+        if (cidade != 'Curitiba') {
+          alert('Cadastro negado pois não atendemos essa cidade.')
+          return
+        }
+
+        let novoID = 1
+
+        if (residencias.length > 0) {
+          novoID = Math.max(...residencias.map(r => r.id_res)) + 1
+        }
+
+        const novaResidencia = {
+          id_res: novoID,
+          cep,
+          estado,
+          cidade,
+          bairro,
+          rua,
+          numero,
+          complemento,
+          id_prop: Number(proprietario)
+        }
+
+        residencias.push(novaResidencia)
+
+        localStorage.setItem('residencias', JSON.stringify(residencias))
+
+        alert('Residência cadastrada com sucesso!')
+
+        form.reset()
+      })
+    </script>
+  </body>
+</html>
