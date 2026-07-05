@@ -9,17 +9,31 @@
   <style>
     .botao-inserir-novo {
       position: fixed;
-      top: 30px;
-      left: 150px;
-      padding: 50px 100px;
-      font-size: 25px;
+      top: 50px;
+      left: 100px;
+      padding: 35px 50px;
+      font-size: 20px;
       cursor: pointer;
-      background-color: rgb(101, 175, 224);
+      background-color: rgb(70, 166, 230);
       border-radius: 24px;
       transition: 0.2s;
       display: inline-block;
-      text-decoration: underline;
-      color: blue;
+      text-decoration: none;
+      color: rgb(0, 0, 0);
+      font-family: verdana;
+    }
+
+    .logo {
+      font-size: 60px;
+      font-weight: bold;
+      font-family: Arial;
+      color: rgb(15, 116, 184);
+      text-align: right;
+      margin-bottom: 50px;
+      margin-top: 65px;
+      text-decoration: none;
+      display: block;
+      margin-right: 85px;
     }
 
     .conteúdo-do-botao {
@@ -28,13 +42,13 @@
       justify-content: center;
     }
 
-    a:hover {
+    .botao-inserir-novo:hover {
       background-color: rgb(15, 116, 184);
     }
 
     table {
       width: 90%;
-      margin: 180px auto 30px auto;
+      margin: 300px auto 30px auto;
       border-collapse: collapse;
       background: white;
     }
@@ -44,6 +58,7 @@
       border: 1px solid #ccc;
       padding: 10px;
       text-align: center;
+      font-family: verdana;
     }
 
     th {
@@ -53,23 +68,37 @@
     tr:nth-child(even) {
       background-color: #f2f2f2;
     }
+
+    footer {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background-color: rgba(101, 175, 224, 0.582);
+      color: rgb(0, 0, 0);
+      text-align: center;
+      padding: 30px 0;
+      font-family: Verdana;
+      font-size: 13px;
+    }
   </style>
   <body>
-    <a href="./cad_resi.html" class="botao-inserir-novo">
-      Inserir nova residência
-    </a>
+    <a href="../index.html" class="logo">🛜FastNet🛜</a>
+    <a href="./cad_resi.html" class="botao-inserir-novo"
+      >INSERIR NOVA RESIDÊNCIA</a
+    >
 
     <table id="tabelaResidencias">
       <thead>
         <tr>
           <th>ID</th>
           <th>CEP</th>
-          <th>Estado</th>
-          <th>Cidade</th>
-          <th>Bairro</th>
-          <th>Rua</th>
           <th>Número</th>
-          <th>complemento</th>
+          <th>Complemento</th>
+          <th>Rua</th>
+          <th>Bairro</th>
+          <th>Cidade</th>
+          <th>Estado</th>
           <th>ID do proprietário</th>
         </tr>
       </thead>
@@ -77,15 +106,7 @@
     </table>
 
     <script>
-      let residencias = JSON.parse(localStorage.getItem('residencias'))
-
-      if (residencias == null) {
-        residencias = [
-          // coloque aqui os registros do seu residencia.csv
-        ]
-
-        localStorage.setItem('residencias', JSON.stringify(residencias))
-      }
+      let residencias = JSON.parse(localStorage.getItem('residencias')) || []
 
       const proprietarios =
         JSON.parse(localStorage.getItem('proprietarios')) || []
@@ -96,13 +117,10 @@
         const linha = document.createElement('tr')
 
         const td = document.createElement('td')
-
         td.colSpan = 9
-
         td.textContent = 'Nenhuma residência cadastrada.'
 
         linha.appendChild(td)
-
         tbody.appendChild(linha)
       }
 
@@ -110,15 +128,17 @@
         const linha = document.createElement('tr')
 
         ;[
-          res.id_res,
-          res.cep,
-          res.estado,
-          res.cidade,
-          res.bairro,
-          res.rua,
-          res.numero,
-          res.complemento,
-          res.id_prop
+          [
+            res.id_res,
+            res.cep,
+            res.numero,
+            res.complemento,
+            res.rua,
+            res.bairro,
+            res.cidade,
+            res.estado,
+            res.id_prop
+          ]
         ].forEach(valor => {
           const td = document.createElement('td')
 
@@ -130,5 +150,7 @@
         tbody.appendChild(linha)
       })
     </script>
+
+    <footer>🛜FastNet🛜 - Uma internet mais rápida do que nunca!</footer>
   </body>
 </html>
