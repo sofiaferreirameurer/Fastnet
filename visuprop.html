@@ -4,22 +4,36 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>Visualizar cadastros dos proprietários</title>
+    <title>Visualizar Proprietários</title>
 
     <style>
       .botao-inserir-novo {
         position: fixed;
-        top: 30px;
-        left: 150px;
-        padding: 50px 100px;
-        font-size: 25px;
+        top: 50px;
+        left: 100px;
+        padding: 35px 50px;
+        font-size: 20px;
         cursor: pointer;
-        background-color: rgb(101, 175, 224);
+        background-color: rgb(70, 166, 230);
         border-radius: 24px;
         transition: 0.2s;
         display: inline-block;
-        text-decoration: underline;
-        color: blue;
+        text-decoration: none;
+        color: rgb(0, 0, 0);
+        font-family: verdana;
+      }
+
+      .logo {
+        font-size: 60px;
+        font-weight: bold;
+        font-family: Arial;
+        color: rgb(15, 116, 184);
+        text-align: right;
+        margin-bottom: 50px;
+        margin-top: 65px;
+        text-decoration: none;
+        display: block;
+        margin-right: 85px;
       }
 
       .conteúdo-do-botao {
@@ -28,13 +42,13 @@
         justify-content: center;
       }
 
-      a:hover {
+      .botao-inserir-novo:hover {
         background-color: rgb(15, 116, 184);
       }
 
       table {
         width: 90%;
-        margin: 180px auto 30px auto;
+        margin: 300px auto 30px auto;
         border-collapse: collapse;
         background: white;
       }
@@ -44,21 +58,36 @@
         border: 1px solid #ccc;
         padding: 10px;
         text-align: center;
+        font-family: verdana;
       }
 
       th {
-        background-color: rgb(101, 175, 224);
+        background-color: rgba(101, 175, 224, 0.582);
       }
 
       tr:nth-child(even) {
         background-color: #f2f2f2;
       }
+
+      footer {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background-color: rgba(101, 175, 224, 0.582);
+        color: rgb(0, 0, 0);
+        text-align: center;
+        padding: 30px 0;
+        font-family: Verdana;
+        font-size: 13px;
+      }
     </style>
   </head>
   <body>
-    <a href="./cad_prop.html" class="botao-inserir-novo">
-      Inserir novo proprietário
-    </a>
+    <a href="../index.html" class="logo">🛜FastNet🛜</a>
+    <a href="./cad_prop.html" class="botao-inserir-novo"
+      >INSERIR NOVO PROPRIETÁRIO</a
+    >
 
     <table id="tabelaProprietarios">
       <thead>
@@ -76,63 +105,8 @@
     </table>
 
     <script>
-      let proprietarios = JSON.parse(localStorage.getItem('proprietarios'))
-
-      if (proprietarios == null) {
-        proprietarios = [
-          {
-            id_prop: 1,
-            nome: 'Ana Beatriz Souza',
-            nascimento: '15/03/1992',
-            cpf: '123.456.789-10',
-            rg: '12345678-9',
-            email: 'ana.souza@email.com',
-            tel: '(41)99876-1234'
-          },
-
-          {
-            id_prop: 2,
-            nome: 'Carlos Eduardo Lima',
-            nascimento: '28/11/1985',
-            cpf: '234.567.890-21',
-            rg: '23456789-0',
-            email: 'carlos.lima@email.com',
-            tel: '(41)99765-2345'
-          },
-
-          {
-            id_prop: 3,
-            nome: 'Mariana Alves Rocha',
-            nascimento: '09/07/1998',
-            cpf: '345.678.901-32',
-            rg: '34567890-1',
-            email: 'mariana.rocha@email.com',
-            tel: '(41)99654-3456'
-          },
-
-          {
-            id_prop: 4,
-            nome: 'João Pedro Martins',
-            nascimento: '21/01/1979',
-            cpf: '456.789.012-43',
-            rg: '45678901-2',
-            email: 'joao.martins@email.com',
-            tel: '(41)99543-4567'
-          },
-
-          {
-            id_prop: 5,
-            nome: 'Fernanda Cristina Gomes',
-            nascimento: '30/09/1990',
-            cpf: '567.890.123-54',
-            rg: '56789012-3',
-            email: 'fernanda.gomes@email.com',
-            tel: '(41)99432-5678'
-          }
-        ]
-
-        localStorage.setItem('proprietarios', JSON.stringify(proprietarios))
-      }
+      let proprietarios =
+        JSON.parse(localStorage.getItem('proprietarios')) || []
 
       const tbody = document.querySelector('#tabelaProprietarios tbody')
 
@@ -181,5 +155,6 @@
         tbody.appendChild(linha)
       })
     </script>
+    <footer>🛜FastNet🛜 - Uma internet mais rápida do que nunca!</footer>
   </body>
 </html>
