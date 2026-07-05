@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>cadastrar residência</title>
+    <title>Cadastrar Residências</title>
 
     <style>
       body {
@@ -20,6 +20,8 @@
         color: rgb(15, 116, 184);
         text-align: center;
         margin-bottom: 50px;
+        margin-top: 70px;
+        text-decoration: none;
       }
 
       form {
@@ -27,6 +29,7 @@
         grid-template-columns: 1fr 1fr;
         gap: 20px 40px;
         align-items: start;
+        margin-top: 120px;
       }
 
       .campo {
@@ -34,10 +37,11 @@
         flex-direction: column;
         align-items: flex-start;
         gap: 5px;
-        margin-bottom: 65px;
+        margin-bottom: 10px;
       }
 
-      input {
+      input,
+      select {
         width: 250px;
         padding: 10px;
         border: 2px solid #ccc;
@@ -54,8 +58,9 @@
         background-color: white;
       }
 
-      input:hover {
-        background-color: rgb(43, 121, 173);
+      input:hover,
+      select:hover {
+        background-color: rgba(101, 175, 224, 0.582);
       }
 
       .salvar {
@@ -76,40 +81,37 @@
       .salvar:hover {
         background-color: rgb(30, 95, 140);
       }
+
+      .obrigatorio {
+        color: red;
+        font-weight: bold;
+      }
+
+      footer {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background-color: rgba(101, 175, 224, 0.582);
+        color: rgb(0, 0, 0);
+        text-align: center;
+        padding: 30px 0;
+        font-family: Verdana;
+        font-size: 13px;
+      }
     </style>
   </head>
 
   <body>
-    <div class="logo">🛜FastNet🛜</div>
-
+    <a href="../index.html" class="logo">🛜FastNet🛜</a>
     <form id="formResidencia">
       <div class="campo">
-        <label for="cep">CEP</label>
+        <label for="cep">CEP <span class="obrigatorio">*</span></label>
         <input type="text" id="cep" name="cep" required />
       </div>
 
       <div class="campo">
-        <label for="estado">Estado</label>
-        <input type="text" id="estado" name="estado" required />
-      </div>
-
-      <div class="campo">
-        <label for="cidade">Cidade</label>
-        <input type="text" id="cidade" name="cidade" required />
-      </div>
-
-      <div class="campo">
-        <label for="bairro">Bairro</label>
-        <input type="text" id="bairro" name="bairro" required />
-      </div>
-
-      <div class="campo">
-        <label for="rua">Rua </label>
-        <input type="text" id="rua" name="rua" required />
-      </div>
-
-      <div class="campo">
-        <label for="número">Número </label>
+        <label for="número">Número <span class="obrigatorio">*</span></label>
         <input type="text" id="número" name="número" required />
       </div>
 
@@ -119,7 +121,31 @@
       </div>
 
       <div class="campo">
-        <label for="proprietário">Proprietário</label>
+        <label for="rua">Rua <span class="obrigatorio">*</span></label>
+        <input type="text" id="rua" name="rua" required />
+      </div>
+
+      <div class="campo">
+        <label for="bairro">Bairro <span class="obrigatorio">*</span></label>
+        <input type="text" id="bairro" name="bairro" required />
+      </div>
+
+      <div class="campo">
+        <label for="cidade">Cidade <span class="obrigatorio">*</span></label>
+        <input type="text" id="cidade" name="cidade" required />
+      </div>
+
+      <div class="campo">
+        <label for="estado">Estado <span class="obrigatorio">*</span></label>
+        <select id="estado" name="estado" required>
+          <option value="PR">PR</option>
+        </select>
+      </div>
+
+      <div class="campo">
+        <label for="proprietario"
+          >Proprietário <span class="obrigatorio">*</span></label
+        >
         <select id="proprietario" name="proprietario" required>
           <option value="">Selecione um proprietário</option>
         </select>
@@ -152,7 +178,10 @@
 
         const cep = document.getElementById('cep').value.trim()
         const estado = document.getElementById('estado').value.trim()
-        const cidade = document.getElementById('cidade').value.trim()
+        const cidade = document
+          .getElementById('cidade')
+          .value.trim()
+          .toLowerCase()
         const bairro = document.getElementById('bairro').value.trim()
         const rua = document.getElementById('rua').value.trim()
         const numero = document.getElementById('número').value.trim()
@@ -173,7 +202,7 @@
           return
         }
 
-        if (cidade != 'Curitiba') {
+        if (cidade != 'curitiba') {
           alert('Cadastro negado pois não atendemos essa cidade.')
           return
         }
@@ -205,5 +234,6 @@
         form.reset()
       })
     </script>
+    <footer>🛜FastNet🛜 - Uma internet mais rápida do que nunca!</footer>
   </body>
 </html>
