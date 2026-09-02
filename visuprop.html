@@ -7,10 +7,18 @@
     <title>Visualizar Proprietários</title>
 
     <style>
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        background-color: #fffdfd;
+      }
+
       .botao-inserir-novo {
-        position: fixed;
+        position: absolute;
         top: 50px;
-        left: 100px;
+        right: 100px;
         padding: 35px 50px;
         font-size: 20px;
         cursor: pointer;
@@ -20,7 +28,7 @@
         display: inline-block;
         text-decoration: none;
         color: rgb(0, 0, 0);
-        font-family: verdana;
+        font-family: Verdana;
       }
 
       .logo {
@@ -28,18 +36,12 @@
         font-weight: bold;
         font-family: Arial;
         color: rgb(15, 116, 184);
-        text-align: right;
+        text-align: left;
         margin-bottom: 50px;
         margin-top: 65px;
         text-decoration: none;
         display: inline-block;
-        margin-right: 85px;
-      }
-
-      .conteúdo-do-botao {
-        display: flex;
-        gap: 140px;
-        justify-content: center;
+        margin-left: 85px;
       }
 
       .botao-inserir-novo:hover {
@@ -48,7 +50,7 @@
 
       table {
         width: 90%;
-        margin: 200px auto 30px auto;
+        margin: 100px auto 30px auto;
         border-collapse: collapse;
         background: white;
       }
@@ -58,11 +60,11 @@
         border: 1px solid #ccc;
         padding: 10px;
         text-align: center;
-        font-family: verdana;
+        font-family: Verdana;
       }
 
       th {
-        background-color: rgba(101, 175, 224, 0.582);
+        background-color: rgb(101, 175, 224);
       }
 
       tr:nth-child(even) {
@@ -70,9 +72,7 @@
       }
 
       footer {
-        position: relative;
-        bottom: 0;
-        left: 0;
+        margin-top: auto;
         width: 100%;
         background-color: rgba(101, 175, 224, 0.582);
         color: rgb(0, 0, 0);
@@ -83,11 +83,13 @@
       }
     </style>
   </head>
+
   <body>
     <a href="../index.html" class="logo">🛜FastNet🛜</a>
-    <a href="./cad_prop.html" class="botao-inserir-novo"
-      >INSERIR NOVO PROPRIETÁRIO</a
-    >
+
+    <a href="./cad_prop.html" class="botao-inserir-novo">
+      INSERIR NOVO PROPRIETÁRIO
+    </a>
 
     <table id="tabelaProprietarios">
       <thead>
@@ -101,6 +103,7 @@
           <th>Telefone</th>
         </tr>
       </thead>
+
       <tbody></tbody>
     </table>
 
@@ -155,6 +158,9 @@
         tbody.appendChild(linha)
       })
     </script>
-    <footer>🛜FastNet🛜 - Uma internet mais rápida do que nunca!</footer>
+
+    <footer>
+      🛜FastNet🛜 - Uma internet mais rápida do que nunca!
+    </footer>
   </body>
 </html>
