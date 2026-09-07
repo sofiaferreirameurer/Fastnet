@@ -93,6 +93,7 @@
     <table id="tabelaProprietarios">
       <thead>
         <tr>
+          
           <th>ID</th>
           <th>Nome</th>
           <th>Nascimento</th>
@@ -100,6 +101,7 @@
           <th>RG</th>
           <th>Email</th>
           <th>Telefone</th>
+          <th>Ativo</th>
         </tr>
       </thead>
 
@@ -116,7 +118,7 @@
         const linha = document.createElement('tr')
 
         const coluna = document.createElement('td')
-        coluna.colSpan = 7
+        coluna.colSpan = 8
         coluna.textContent = 'Nenhum proprietário cadastrado.'
 
         linha.appendChild(coluna)
@@ -152,6 +154,13 @@
 
         td = document.createElement('td')
         td.textContent = proprietario.tel
+        linha.appendChild(td)
+
+        td = document.createElement('td')
+        const checkbox = document.createElement('input')
+        checkbox.type = 'checkbox'
+        checkbox.checked = proprietario.ativo || false
+        td.appendChild(checkbox)
         linha.appendChild(td)
 
         tbody.appendChild(linha)
