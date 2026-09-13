@@ -101,7 +101,6 @@
           <th>RG</th>
           <th>Email</th>
           <th>Telefone</th>
-          <th>Ativo</th>
         </tr>
       </thead>
 
@@ -154,13 +153,6 @@
 
         td = document.createElement('td')
         td.textContent = proprietario.tel
-        linha.appendChild(td)
-
-        td = document.createElement('td')
-        const checkbox = document.createElement('input')
-        checkbox.type = 'checkbox'
-        checkbox.checked = proprietario.ativo || false
-        td.appendChild(checkbox)
         linha.appendChild(td)
 
         tbody.appendChild(linha)
