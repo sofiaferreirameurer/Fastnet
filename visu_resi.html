@@ -110,26 +110,26 @@
     </table>
 
     <script>
-      let residencias = JSON.parse(localStorage.getItem('residencias')) || []
+      let residencias = JSON.parse(localStorage.getItem("residencias")) || []
 
       const proprietarios =
-        JSON.parse(localStorage.getItem('proprietarios')) || []
+        JSON.parse(localStorage.getItem("proprietarios")) || []
 
-      const tbody = document.querySelector('#tabelaResidencias tbody')
+      const tbody = document.querySelector("#tabelaResidencias tbody")
 
       if (residencias.length == 0) {
-        const linha = document.createElement('tr')
+        const linha = document.createElement("tr")
 
-        const td = document.createElement('td')
+        const td = document.createElement("td")
         td.colSpan = 9
-        td.textContent = 'Nenhuma residência cadastrada.'
+        td.textContent = "Nenhuma residência cadastrada."
 
         linha.appendChild(td)
         tbody.appendChild(linha)
       }
 
       residencias.forEach(res => {
-        const linha = document.createElement('tr')
+        const linha = document.createElement("tr")
 
         const valores = [
           res.id_res,
@@ -145,7 +145,7 @@
         ]
 
         valores.forEach(valor => {
-          const td = document.createElement('td')
+          const td = document.createElement("td")
 
           td.textContent = valor
 

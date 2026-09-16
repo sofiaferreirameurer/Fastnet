@@ -132,7 +132,9 @@
 
       <div class="campo">
         <label for="cidade">Cidade <span class="obrigatorio">*</span></label>
-        <input type="text" id="cidade" name="cidade" required />
+        <select id="cidade" name="cidade" required>
+          <option value="Curitiba">Curitiba</option>
+        </select>
       </div>
 
       <div class="campo">
@@ -153,9 +155,9 @@
         <label for="plano">Plano atual <span class="obrigatorio">*</span></label>
         <select id="plano" name="plano" required>
           <option value="">Selecione um plano</option>
-          <option value="Fibra Plus">Fibra Plus (500mbps)</option>
-          <option value="Fibra Ultra">Fibra Ultra (700mbps)</option>
-          <option value="Fibra Turbo">Fibra Turbo (1gbps)</option>
+          <option value="Fibra Plus (500mbps)">Fibra Plus (500mbps)</option>
+          <option value="Fibra Ultra (700mbps)">Fibra Ultra (700mbps)</option>
+          <option value="Fibra Turbo (1gbps)">Fibra Turbo (1gbps)</option>
         </select>
       </div>
 
@@ -163,56 +165,48 @@
     </form>
     <script>
       const proprietarios =
-        JSON.parse(localStorage.getItem('proprietarios')) || []
+        JSON.parse(localStorage.getItem("proprietarios")) || []
 
-      const select = document.getElementById('proprietario')
+      const select = document.getElementById("proprietario")
 
       proprietarios.forEach(prop => {
-        const option = document.createElement('option')
+        const option = document.createElement("option")
 
         option.value = prop.id_prop
 
-        option.textContent = prop.id_prop + ' - ' + prop.nome
+        option.textContent = prop.id_prop + " - " + prop.nome
 
         select.appendChild(option)
       })
 
-      let residencias = JSON.parse(localStorage.getItem('residencias')) || []
+      let residencias = JSON.parse(localStorage.getItem("residencias")) || []
 
-      const form = document.getElementById('formResidencia')
+      const form = document.getElementById("formResidencia")
 
-      form.addEventListener('submit', function (e) {
+      form.addEventListener("submit", function (e) {
         e.preventDefault()
 
-        const cep = document.getElementById('cep').value.trim()
-        const estado = document.getElementById('estado').value.trim()
-        const cidade = document
-          .getElementById('cidade')
-          .value.trim()
-          .toLowerCase()
-        const bairro = document.getElementById('bairro').value.trim()
-        const rua = document.getElementById('rua').value.trim()
-        const numero = document.getElementById('número').value.trim()
-        const complemento = document.getElementById('complemento').value.trim()
-        const proprietario = document.getElementById('proprietario').value
-        const plano = document.getElementById('plano').value
+        const cep = document.getElementById("cep").value.trim()
+        const estado = document.getElementById("estado").value.trim()
+        const cidade = document.getElementById("cidade").value.trim()
+        const bairro = document.getElementById("bairro").value.trim()
+        const rua = document.getElementById("rua").value.trim()
+        const numero = document.getElementById("número").value.trim()
+        const complemento = document.getElementById("complemento").value.trim()
+        const proprietario = document.getElementById("proprietario").value
+        const plano = document.getElementById("plano").value
 
         if (
-          cep == '' ||
-          estado == '' ||
-          cidade == '' ||
-          bairro == '' ||
-          rua == '' ||
-          numero == '' ||
-          proprietario == '' ||
+          cep == "" ||
+          estado == "" ||
+          cidade == "" ||
+          bairro == "" ||
+          rua == "" ||
+          numero == "" ||
+          proprietario == "" ||
           plano == ''
         ) {
-          alert('Preencha todos os campos.')
-          return
-        }
-
-        if (cidade != 'curitiba') {
-          alert('Cadastro negado pois não atendemos essa cidade.')
+          alert("Preencha todos os campos.")
           return
         }
 
@@ -237,9 +231,9 @@
 
         residencias.push(novaResidencia)
 
-        localStorage.setItem('residencias', JSON.stringify(residencias))
+        localStorage.setItem("residencias", JSON.stringify(residencias))
 
-        alert('Residência cadastrada com sucesso!')
+        alert("Residência cadastrada com sucesso!")
 
         form.reset()
       })

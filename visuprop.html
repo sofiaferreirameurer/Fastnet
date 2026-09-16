@@ -109,49 +109,49 @@
 
     <script>
       let proprietarios =
-        JSON.parse(localStorage.getItem('proprietarios')) || []
+        JSON.parse(localStorage.getItem("proprietarios")) || []
 
-      const tbody = document.querySelector('#tabelaProprietarios tbody')
+      const tbody = document.querySelector("#tabelaProprietarios tbody")
 
       if (proprietarios.length == 0) {
-        const linha = document.createElement('tr')
+        const linha = document.createElement("tr")
 
-        const coluna = document.createElement('td')
+        const coluna = document.createElement("td")
         coluna.colSpan = 8
-        coluna.textContent = 'Nenhum proprietário cadastrado.'
+        coluna.textContent = "Nenhum proprietário cadastrado."
 
         linha.appendChild(coluna)
         tbody.appendChild(linha)
       }
 
       proprietarios.forEach(proprietario => {
-        const linha = document.createElement('tr')
+        const linha = document.createElement("tr")
 
-        let td = document.createElement('td')
+        let td = document.createElement("td")
         td.textContent = proprietario.id_prop
         linha.appendChild(td)
 
-        td = document.createElement('td')
+        td = document.createElement("td")
         td.textContent = proprietario.nome
         linha.appendChild(td)
 
-        td = document.createElement('td')
+        td = document.createElement("td")
         td.textContent = proprietario.nascimento
         linha.appendChild(td)
 
-        td = document.createElement('td')
+        td = document.createElement("td")
         td.textContent = proprietario.cpf
         linha.appendChild(td)
 
-        td = document.createElement('td')
+        td = document.createElement("td")
         td.textContent = proprietario.rg
         linha.appendChild(td)
 
-        td = document.createElement('td')
+        td = document.createElement("td")
         td.textContent = proprietario.email
         linha.appendChild(td)
 
-        td = document.createElement('td')
+        td = document.createElement("td")
         td.textContent = proprietario.tel
         linha.appendChild(td)
 

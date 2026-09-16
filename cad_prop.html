@@ -137,38 +137,38 @@
 
     <script>
       let proprietarios =
-        JSON.parse(localStorage.getItem('proprietarios')) || []
+        JSON.parse(localStorage.getItem("proprietarios")) || []
 
-      localStorage.setItem('proprietarios', JSON.stringify(proprietarios))
+      localStorage.setItem("proprietarios", JSON.stringify(proprietarios))
 
-      const form = document.getElementById('formProprietario')
+      const form = document.getElementById("formProprietario")
 
-      form.addEventListener('submit', function (event) {
+      form.addEventListener("submit", function (event) {
         event.preventDefault()
 
-        const nome = document.getElementById('nome').value.trim()
-        const nascimento = document.getElementById('nascimento').value
-        const cpf = document.getElementById('cpf').value.trim()
-        const rg = document.getElementById('rg').value.trim()
-        const email = document.getElementById('email').value.trim()
-        const tel = document.getElementById('tel').value.trim()
+        const nome = document.getElementById("nome").value.trim()
+        const nascimento = document.getElementById("nascimento").value
+        const cpf = document.getElementById("cpf").value.trim()
+        const rg = document.getElementById("rg").value.trim()
+        const email = document.getElementById("email").value.trim()
+        const tel = document.getElementById("tel").value.trim()
         const anoNascimento = parseInt(nascimento.substring(0, 4))
         const anoAtual = new Date().getFullYear()
 
         if (anoAtual - anoNascimento < 18) {
-          alert('O proprietário deve ser maior de idade.')
+          alert("O proprietário deve ser maior de idade.")
           return
         }
 
         if (
-          nome == '' ||
-          nascimento == '' ||
-          cpf == '' ||
-          rg == '' ||
-          email == '' ||
-          tel == ''
+          nome == "" ||
+          nascimento == "" ||
+          cpf == "" ||
+          rg == "" ||
+          email == "" ||
+          tel == ""
         ) {
-          alert('Preencha todos os campos.')
+          alert("Preencha todos os campos.")
           return
         }
 
@@ -177,8 +177,8 @@
           novoID = Math.max(...proprietarios.map(p => p.id_prop)) + 1
         }
 
-        const partes = nascimento.split('-')
-        const dataFormatada = partes[2] + '/' + partes[1] + '/' + partes[0]
+        const partes = nascimento.split("-")
+        const dataFormatada = partes[2] + "/" + partes[1] + "/" + partes[0]
         const novoProprietario = {
           id_prop: novoID,
           nome: nome,
@@ -190,9 +190,9 @@
         }
 
         proprietarios.push(novoProprietario)
-        localStorage.setItem('proprietarios', JSON.stringify(proprietarios))
+        localStorage.setItem("proprietarios", JSON.stringify(proprietarios))
 
-        alert('Cadastro realizado com sucesso!')
+        alert("Cadastro realizado com sucesso!")
         form.reset()
       })
     </script>
