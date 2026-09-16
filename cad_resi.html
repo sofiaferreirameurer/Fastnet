@@ -143,10 +143,19 @@
       </div>
 
       <div class="campo">
-        <label for="proprietario"
-          >Proprietário <span class="obrigatorio">*</span></label>
+        <label for="proprietario">Proprietário <span class="obrigatorio">*</span></label>
         <select id="proprietario" name="proprietario" required>
           <option value="">Selecione um proprietário</option>
+        </select>
+      </div>
+
+      <div class="campo">
+        <label for="plano">Plano atual <span class="obrigatorio">*</span></label>
+        <select id="plano" name="plano" required>
+          <option value="">Selecione um plano</option>
+          <option value="Fibra Plus">Fibra Plus (500mbps)</option>
+          <option value="Fibra Ultra">Fibra Ultra (700mbps)</option>
+          <option value="Fibra Turbo">Fibra Turbo (1gbps)</option>
         </select>
       </div>
 
@@ -186,6 +195,7 @@
         const numero = document.getElementById('número').value.trim()
         const complemento = document.getElementById('complemento').value.trim()
         const proprietario = document.getElementById('proprietario').value
+        const plano = document.getElementById('plano').value
 
         if (
           cep == '' ||
@@ -194,7 +204,8 @@
           bairro == '' ||
           rua == '' ||
           numero == '' ||
-          proprietario == ''
+          proprietario == '' ||
+          plano == ''
         ) {
           alert('Preencha todos os campos.')
           return
@@ -220,7 +231,8 @@
           rua,
           numero,
           complemento,
-          id_prop: Number(proprietario)
+          id_prop: Number(proprietario),
+          plano_atual: plano
         }
 
         residencias.push(novaResidencia)
