@@ -183,8 +183,8 @@
 
       const form = document.getElementById("formResidencia")
 
-      form.addEventListener("submit", function (e) {
-        e.preventDefault()
+      form.addEventListener("submit", function (event) {
+        event.preventDefault()
 
         const cep = document.getElementById("cep").value.trim()
         const estado = document.getElementById("estado").value.trim()
@@ -204,7 +204,7 @@
           rua == "" ||
           numero == "" ||
           proprietario == "" ||
-          plano == ''
+          plano == ""
         ) {
           alert("Preencha todos os campos.")
           return

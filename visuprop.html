@@ -93,7 +93,6 @@
     <table id="tabelaProprietarios">
       <thead>
         <tr>
-          
           <th>ID</th>
           <th>Nome</th>
           <th>Nascimento</th>
@@ -127,33 +126,23 @@
       proprietarios.forEach(proprietario => {
         const linha = document.createElement("tr")
 
-        let td = document.createElement("td")
-        td.textContent = proprietario.id_prop
-        linha.appendChild(td)
+        const valores = [
+          proprietario.id_prop,
+          proprietario.nome,
+          proprietario.nascimento,
+          proprietario.cpf,
+          proprietario.rg,
+          proprietario.email,
+          proprietario.tel
+        ]
 
-        td = document.createElement("td")
-        td.textContent = proprietario.nome
-        linha.appendChild(td)
+        valores.forEach(valor => {
+          const td = document.createElement("td")
 
-        td = document.createElement("td")
-        td.textContent = proprietario.nascimento
-        linha.appendChild(td)
+          td.textContent = valor
 
-        td = document.createElement("td")
-        td.textContent = proprietario.cpf
-        linha.appendChild(td)
-
-        td = document.createElement("td")
-        td.textContent = proprietario.rg
-        linha.appendChild(td)
-
-        td = document.createElement("td")
-        td.textContent = proprietario.email
-        linha.appendChild(td)
-
-        td = document.createElement("td")
-        td.textContent = proprietario.tel
-        linha.appendChild(td)
+          linha.appendChild(td)
+        })
 
         tbody.appendChild(linha)
       })
